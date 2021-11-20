@@ -67,6 +67,9 @@ func main() {
 	// tell the main go routine to hold up for a moment
 	wg.Wait()
 
+	// at this point, additional processing could take place since we have
+	// found no duplciates or issues with the files
+
 	// well ... how did we do?
 	fmt.Println("Process complete - no duplciates found")
 }
@@ -86,6 +89,9 @@ func proc(fullpath string, m map[string]string, wg *sync.WaitGroup, mux *sync.Mu
 
 			// let the world know we got this
 			fmt.Println("cleaning up and exiting gracefully")
+
+			// at this point, a logger, emailer, texter, etc could be employed
+			// to notify responsible parties of the failure
 
 			// exit
 			os.Exit(0)
