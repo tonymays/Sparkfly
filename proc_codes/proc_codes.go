@@ -95,6 +95,9 @@ func proc(fullpath string, m map[string]string, wg *sync.WaitGroup, mux *sync.Mu
 	// open the file
 	f, err := os.Open(fullpath)
 
+	// defer the file close
+	defer f.Close()
+
 	// run our defer recover if we catch an error
 	if err != nil {
 		panic(err)
