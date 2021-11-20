@@ -38,13 +38,13 @@ func main() {
 
 	// read the files and throw and any errors
 	files, err := ioutil.ReadDir(dir)
-    if err != nil {
+	if err != nil {
 		// no graceful exit here Gandalf
-	    panic(err)
-    }
+		panic(err)
+	}
 
 	// let's talk a walk
-    for _, file := range files {
+	for _, file := range files {
 		// increment the wait group counter
 		wg.Add(1)
 
@@ -56,7 +56,7 @@ func main() {
 			// process the file on a go routine
 			go proc(fullpath, m, &wg, &mux)
 		}
-    }
+	}
 
 	// tell the main go routine to hold up for a moment
 	wg.Wait()
