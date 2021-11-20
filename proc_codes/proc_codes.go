@@ -40,7 +40,7 @@ func main() {
 	mux := sync.Mutex{}
 
 	// where are our files ... CHANGE THIS TO MATCH YOUR TEST ENVIRONMENT
-	dir := "/home/api_user/sparkfly/dupcode/code_files"
+	dir := "code_files"
 
 	// read the files and throw and any errors
 	files, err := ioutil.ReadDir(dir)
