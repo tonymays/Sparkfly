@@ -9,6 +9,12 @@ go routine.  Each file represented will share a single map to search for and sto
 unique codes.  A panic will be issued if a map search determines a code to be a
 duplicate.  The panic will be handled by the recover() function which will allow
 our main go routine to exit gracefully.
+
+There are many ways to shutdown go routine processes - channels, context cancels, etc
+
+So I thought it may be of entertainment value to illustrate how to gracefully
+shutdown on a panic with the recover() method.  Hopefully, it is a unique
+thought solution for this issue.
 */
 
 package main
