@@ -124,7 +124,7 @@ func proc(fullpath string, m map[string]string, wg *sync.WaitGroup, mux *sync.Mu
 
 			// if we find it in the map ...
 			if found {
-				// stop everything right here with our customer error message
+				// stop everything right here with our custom error message
 				panic("duplicate " + s[0] + "->" +s[1])
 			// and if we did not find it
 			} else {
