@@ -11,6 +11,7 @@ import (
 	"strings"
 )
 
+// ---- main go routine ----
 func main() {
 	// what file do I want to zip
 	fn := "test.csv"
@@ -43,11 +44,14 @@ func main() {
 	f.Close()
 }
 
+// ---- MyCompressor Interface ----
+// should be placed in its own package ... leaving it here for challenge convenience
 type MyCompressor interface {
 	ChangeExt(fn string, ext string) (string, error)
 	Compress(rc io.ReadCloser) ([]byte, error)
 }
 
+// ---- Compress ----
 func Compress(rc io.ReadCloser) ([]byte, error) {
 	// read the contents of the file
 	reader := bufio.NewReader(rc)
@@ -61,6 +65,11 @@ func Compress(rc io.ReadCloser) ([]byte, error) {
 
 	// create a byte buffer
 	var b bytes.Buffer
+
+	// Note: could have chosen gzip.NewWriterLevel for BestSpeed or BestCompression
+	// The instructions made it clear that we wanted BestCompression but
+	// BestSpeed may be better on low memory hardware.  So I just went with
+	// a gzip.NewWriter instead.
 
 	// zip the string to a byte buffer
 	gz := gzip.NewWriter(&b)
@@ -76,6 +85,11 @@ func Compress(rc io.ReadCloser) ([]byte, error) {
 	return b.Bytes(), nil
 }
 
+// ---- ChangeExt ----
+// a handy routine to change a files extension based upon finding the last
+// dot (.) in the file name thus assuming the remainder is an extension.
+// The technical debt with this routine is that test.tony.file fails in that
+// .file is not an extension.  Thought it important to point that out.
 func ChangeExt(fn string, ext string) (string, error) {
 	// throw error if missing fn is empty
 	if len(fn) == 0 {
