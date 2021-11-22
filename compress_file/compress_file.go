@@ -21,6 +21,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer f.Close()
 
 	// compress the file's contents
 	data, err := Compress(f)
@@ -34,14 +35,14 @@ func main() {
 		panic(err)
 	}
 
-	// this is where you write to S3 but I am doing it locally
-	cf, _ := os.Create(gz)
+	// simulation s3 write ... this is where you write to S3 but I am doing it locally
+	cf, err := os.Create(gz)
+	if err != nil {
+		panic(err)
+	}
+	defer cf.Close()
 	w := gzip.NewWriter(cf)
 	w.Write(data)
-
-	// close both version of the file
-	w.Close()
-	f.Close()
 }
 
 // ---- MyCompressor Interface ----
