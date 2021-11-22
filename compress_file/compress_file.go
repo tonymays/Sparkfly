@@ -21,7 +21,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	defer f.Close()
 
 	// compress the file's contents
 	data, err := Compress(f)
@@ -54,6 +53,8 @@ type MyCompressor interface {
 
 // ---- Compress ----
 func Compress(rc io.ReadCloser) ([]byte, error) {
+	defer rc.Close()
+
 	// read the contents of the file
 	reader := bufio.NewReader(rc)
 	data, err := ioutil.ReadAll(reader)
