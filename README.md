@@ -1,6 +1,6 @@
 # Sparkfly
 
-##Test 1
+## Test 1
 proc_codes.go handles the first test given
 
 ```
@@ -20,7 +20,7 @@ cleaning up and exiting gracefully
 No test routine was written
 
 
-##Test 2
+## Test 2
 compress_file.go handles the second test given
 
 ```
